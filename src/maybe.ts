@@ -2,6 +2,12 @@ export abstract class Maybe<T>{
     abstract fmap<T2>(f: (val: T) => T2): Maybe<T2>;
 
     abstract eq(val: T): boolean;
+
+    abstract eqMaybe<T>(maybeVal: Maybe<T>): boolean;
+
+    public valWithDefault(defaultValue: T): T {
+        return isJust(this) ? this.val() : defaultValue;
+    }
 }
 
 export class Nothing<T> extends Maybe<T> {
@@ -15,7 +21,7 @@ export class Nothing<T> extends Maybe<T> {
     }
 
     public fmap<T, T2>(f: (val: T) => T2): Maybe<T2> {
-        return this;
+        return Nothing.create();
     }
 
     public eq<T>(val: T): boolean {
@@ -58,6 +64,10 @@ export class Just<T> extends Maybe<T> {
 
 export function extract<T>(justValue: Just<T>): T{
     return justValue.val();
+}
+
+export function withDefault<T>(maybeValue: Maybe<T>, defaultValue: T): T{
+    return isJust(maybeValue) ? maybeValue.val() : defaultValue;
 }
 
 export function isJust<T>(maybe: Maybe<T>): maybe is Just<T>{

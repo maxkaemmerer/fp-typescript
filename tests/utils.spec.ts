@@ -1,5 +1,5 @@
 import { Just, mapMaybe, Nothing } from "../src/maybe";
-import { compose } from "../src/utils"
+import { compose, curry2, flip } from "../src/utils"
 
 describe('utils', () => {
     describe(compose, () => {
@@ -13,14 +13,21 @@ describe('utils', () => {
         })
     })
 
-    describe(mapMaybe, () => {
-        it('should apply function to all values in list and return those that result in Just', () => {
-            const makeHelloJust = (val: string) => val === 'Hello' ? Just.create(val): Nothing.create(); 
+    describe(curry2, () => {
+        it('should allow passing arguments to curried function separately', () => {
+            const curriedAdd = curry2((a: number, b: number) => a + b);
+            const add3 = curriedAdd(3);
+            expect(curriedAdd(3)(4)).toEqual(7);
+            expect(add3(4)).toEqual(7);
+        })
+    })
 
-            const mappedList = mapMaybe(makeHelloJust, ['Hello', 'Hello!', 'World?']);
-
-            expect(mappedList).toEqual(['Hello']);
-
-        });
+    describe(flip, () => {
+        it('should flip function arguments', () => {
+            const subtract = (a: number, b: number) => a - b;
+            const flippedSubtract = flip(subtract);
+            expect(subtract(3, 4)).toEqual(-1);
+            expect(flippedSubtract(3, 4)).toEqual(1);
+        })
     })
 })
