@@ -1,5 +1,3 @@
-import { append } from "./utils";
-
 export abstract class Maybe<T>{
     abstract fmap<T2>(f: (val: T) => T2): Maybe<T2>;
 
