@@ -9,6 +9,6 @@ export function curry2<T, T2, T3>(f: TwoParamFunction<T, T2, T3>): (a: T) => (b:
     return (a: T) => (b: T2) => f(a, b);
 }
 
-export function flip<T, T2, T3>(f: TwoParamFunction<T, T2, T3>): (b: T2, a: T) => T3 {
+export function flip<T, T2, T3>(f: TwoParamFunction<T, T2, T3>): TwoParamFunction<T2, T, T3> {
     return (b: T2, a: T) => f(a, b);
 }

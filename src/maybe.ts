@@ -20,10 +20,12 @@ export class Nothing<T> extends Maybe<T> {
         return new Nothing();
     }
 
+    // eslint-disable-next-line
     public fmap<T, T2>(f: (val: T) => T2): Maybe<T2> {
         return Nothing.create();
     }
 
+    // eslint-disable-next-line
     public eq<T>(val: T): boolean {
         return false;
     }

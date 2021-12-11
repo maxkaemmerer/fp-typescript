@@ -4,7 +4,8 @@
   "description": "Functional experiments in Typescript",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint src tests --fix"
   },
   "author": "Max Kaemmerer",
   "license": "MIT",
@@ -17,5 +18,10 @@
     "jest": "^27.4.4",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "eslint": "^8.4.1"
   }
 }
